@@ -66,7 +66,6 @@ public class Drawer extends JPanel {
 		dataTable = dataCal.getDatas();
 		find = dataCal.getFindBool();
 		result = dataCal.getResult();
-		System.out.printf("\n%.2f  %.2f  %.2f", weight[0], weight[1], weight[2]);
 	}
 
 	@Override

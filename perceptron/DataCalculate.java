@@ -105,9 +105,6 @@ public class DataCalculate {
 					}
 				} else
 					sucessCount += 1;
-				// System.out.printf("\n%d [ %.2f %.2f %.2f] : %.2f * [%.2f %.2f
-				// %.2f]-->[%f : %.2f]",sucessCount, w[0], w[1], w[2], learn,
-				// x[0], x[1], x[2], Math.signum(sum),dataTable.get(i).getD());
 			} // end of for loop for running data in data table.
 			if (sucessCount == dataTable.size()) {
 				find = true;
