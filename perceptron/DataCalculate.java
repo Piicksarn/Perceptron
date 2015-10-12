@@ -17,6 +17,7 @@ public class DataCalculate {
 	public static double learn;
 	public static double[] w = new double[demention];
 	public static double[] x = new double[demention];
+	private int[] result = new int[4];
 	public String filename;
 	
 	public DataCalculate(double learn, int round, double[] weight, String file) throws Exception {
@@ -146,6 +147,10 @@ public class DataCalculate {
 			}	
 		}
 		System.out.printf("the test result is --> %d : %d",expCount , dataEXP.size());
+		result[0] = testCount;
+		result[1] = dataTEST.size();
+		result[2] = expCount;
+		result[3] = dataEXP.size();
 		
 	}
 	// Compare the values for separating the points.
@@ -188,5 +193,9 @@ public class DataCalculate {
 	
 	public ArrayList<Data> getExpData() {
 		return dataEXP;
+	}
+	
+	public int[] getResult() {
+		return result;
 	}
 }
