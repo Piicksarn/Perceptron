@@ -28,6 +28,7 @@ public class DataCalculate {
 		readData();
 		setTable();
 		calculate();
+		resultCal();
 	}
 
 	private void readData()throws Exception
@@ -74,10 +75,10 @@ public class DataCalculate {
 	}
 	
 	// Get each data in table and asign by the index. 
-    public static void initialize(int index) {
+    public static void initialize(int index, ArrayList<Data> list) {
 		x[0] = threshold_value;
-		x[1] = dataTable.get(index).getPonit()[0];
-		x[2] = dataTable.get(index).getPonit()[1];
+		x[1] = list.get(index).getPonit()[0];
+		x[2] = list.get(index).getPonit()[1];
 	}
 
 	public static void calculate() {
@@ -87,7 +88,7 @@ public class DataCalculate {
 			for(int i = 0; i < dataTable.size(); i++) {
 				if(sucessCount == dataTable.size())
 					break;
-				initialize(i);
+				initialize(i, dataTable);
 				sum = 0;
 				for(int j = 0; j < demention; j++) {
 					sum += w[j] * x[j];	
@@ -116,6 +117,36 @@ public class DataCalculate {
 			find = false;
 			System.out.printf("Can not find the solution in round times.");
 		}			
+	}
+	
+	private void resultCal() {
+		int sum = 0;
+		int testCount = 0;
+		int expCount = 0;
+		for(int i = 0; i < dataTEST.size(); i++) {
+			initialize(i, dataTEST);
+			sum = 0;
+			for(int j = 0; j < demention; j++) {
+				sum += w[j] * x[j];	
+			}
+			if(Math.signum(sum) == dataTEST.get(i).getD()) {
+				testCount ++;
+			}
+			
+		}
+		System.out.printf("the test result is --> %d : %d",testCount , dataTEST.size());
+		for(int i = 0; i < dataEXP.size(); i++) {
+			initialize(i, dataEXP);
+			sum = 0;
+			for(int j = 0; j < demention; j++) {
+				sum += w[j] * x[j];	
+			}
+			if(Math.signum(sum) == dataEXP.get(i).getD()) {
+				expCount ++;
+			}	
+		}
+		System.out.printf("the test result is --> %d : %d",expCount , dataEXP.size());
+		
 	}
 	// Compare the values for separating the points.
 	public static boolean compareSign(double a, double b) {
