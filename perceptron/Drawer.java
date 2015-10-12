@@ -13,8 +13,6 @@ import javax.swing.JPanel;
 
 public class Drawer extends JPanel {
 	private ArrayList<Data> dataTable = new ArrayList<Data>();
-	private ArrayList<Data> dataTest = new ArrayList<Data>();
-	private ArrayList<Data> dataExp = new ArrayList<Data>();
 	Color blue = new Color(72, 61, 139);
 	private double[] weight;
 	private boolean find = false;
@@ -35,7 +33,6 @@ public class Drawer extends JPanel {
 		this.windowHeight = windowHeight;
 		xCenter = this.windowWeight / 2;
 		yCenter = this.windowHeight / 2;
-        
 		// The sizeIncrese and sizeDecrese are for controlling the ratio of presentation
 		sizeIncrease.addActionListener(new ActionListener() {
 			@Override
@@ -66,8 +63,6 @@ public class Drawer extends JPanel {
 		weight = dataCal.getWeights();
 		dataTable = dataCal.getDatas();
 		find = dataCal.getFindBool();
-		dataTest = dataCal.getTestData();
-		dataExp = dataCal.getExpData();
 		result = dataCal.getResult();
 		System.out.printf("\n%.2f  %.2f  %.2f", weight[0], weight[1], weight[2]);
 	}

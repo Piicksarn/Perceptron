@@ -135,7 +135,6 @@ public class DataCalculate {
 			}
 			
 		}
-		System.out.printf("the test result is --> %d : %d",testCount , dataTEST.size());
 		for(int i = 0; i < dataEXP.size(); i++) {
 			initialize(i, dataEXP);
 			sum = 0;
@@ -146,7 +145,6 @@ public class DataCalculate {
 				expCount ++;
 			}	
 		}
-		System.out.printf("the test result is --> %d : %d",expCount , dataEXP.size());
 		result[0] = testCount;
 		result[1] = dataTEST.size();
 		result[2] = expCount;
@@ -185,14 +183,6 @@ public class DataCalculate {
 	
 	public boolean getFindBool(){
 		return find;
-	}
-	
-	public ArrayList<Data> getTestData() {
-		return dataTEST;
-	}
-	
-	public ArrayList<Data> getExpData() {
-		return dataEXP;
 	}
 	
 	public int[] getResult() {
