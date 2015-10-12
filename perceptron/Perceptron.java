@@ -1,17 +1,6 @@
 package perceptron;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
-import java.security.Identity;
-import java.util.ArrayList;
-import java.util.IdentityHashMap;
-import java.util.Scanner;
-
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 public class Perceptron extends JFrame {
 
