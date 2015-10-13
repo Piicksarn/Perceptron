@@ -14,9 +14,11 @@ import javax.swing.JPanel;
 
 public class Drawer extends JPanel {
 	private ArrayList<Data> dataTable = new ArrayList<Data>();
-	Color blue = new Color(0, 105, 210);
-	Color red = new Color(255, 82, 82);
-	Color green = new Color(1, 178, 104);
+	Color blue = new Color(89, 150, 150);
+	Color bluePoint = new Color(86, 128, 203);
+	Color redPoint = new Color(209, 95, 99);
+	Color purple = new Color(155, 108, 194);
+	Color yellow = new Color(222, 187, 62);
 	private double[] weight;
 	private boolean find = false;
 	private int xCenter;
@@ -74,12 +76,12 @@ public class Drawer extends JPanel {
 		super.paintComponent(g);
 		drawAxis(g);
 		drawPoint(g);
-		if (find)
-			drawLine(g);
+		drawLine(g);
 		showResultInfo(g);
 	}
 
 	private void drawAxis(Graphics g) {
+		g.setColor(Color.gray);
 		g.drawLine(windowWeight / 2, 0, windowWeight / 2, windowHeight);
 		g.drawLine(0, windowHeight / 2, windowWeight, windowHeight / 2);
 		for (int i = xCenter, j = xCenter; i <= windowWeight && j >= 0; i += ratio, j -= ratio) {
@@ -96,17 +98,17 @@ public class Drawer extends JPanel {
 		for (int i = 0; i < dataTable.size(); i++) {
 			double[] datatmp = mapping(dataTable.get(i).getPonit());
 			if (dataTable.get(i).getD() == -1) {
-				g.setColor(Color.RED);
+				g.setColor(redPoint);
 				g.fillOval((int) datatmp[0], (int) datatmp[1], radius, radius);
 			} else {
-				g.setColor(Color.BLUE);
+				g.setColor(bluePoint);
 				g.fillOval((int) datatmp[0], (int) datatmp[1], radius, radius);
 			}
 		}
 	}
 
 	private void drawLine(Graphics g) {
-		g.setColor(green);
+		g.setColor(yellow);
 		double xOff = (windowWeight / 2);
 		double y1 = (weight[0] * ratio - (weight[1] * xOff)) / weight[2];
 		double y2 = (weight[0] * ratio - (weight[1] * (-1) * xOff)) / weight[2];
@@ -130,7 +132,7 @@ public class Drawer extends JPanel {
 		g.drawString("測試數:  " + Integer.toString(result[3]), 50, 215);
 		g.drawString("測試正確率: " + Float.toString(((float) result[2] / (float) result[3]) * 100) + " %", 50, 240);
 		if(!find) {
-			g.setColor(red);
+			g.setColor(purple);
 			g.drawRect( windowWeight / 2 + 40, 50, 330, 40);
 			g.drawString("Can not Find the suitable sulotion in round time.", windowWeight / 2 + 50, 75);	
 		}
