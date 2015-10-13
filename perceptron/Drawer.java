@@ -14,7 +14,9 @@ import javax.swing.JPanel;
 
 public class Drawer extends JPanel {
 	private ArrayList<Data> dataTable = new ArrayList<Data>();
-	Color blue = new Color(72, 61, 139);
+	Color blue = new Color(0, 105, 210);
+	Color red = new Color(255, 82, 82);
+	Color green = new Color(1, 178, 104);
 	private double[] weight;
 	private boolean find = false;
 	private int xCenter;
@@ -35,8 +37,8 @@ public class Drawer extends JPanel {
 		this.windowHeight = windowHeight;
 		xCenter = this.windowWeight / 2;
 		yCenter = this.windowHeight / 2;
-		// The sizeIncrese and sizeDecrese are for controlling the ratio of
-		// presentation
+		
+		// The sizeIncrese and sizeDecrese are for controlling the ratio of presentation.
 		sizeIncrease.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -52,7 +54,6 @@ public class Drawer extends JPanel {
 					ratio -= 10;
 				radius = (int) (ratio * 0.1);
 				repaint();
-
 			}
 		});
 		sizeIncrease.setText("Bigger");
@@ -105,10 +106,10 @@ public class Drawer extends JPanel {
 	}
 
 	private void drawLine(Graphics g) {
+		g.setColor(green);
 		double xOff = (windowWeight / 2);
 		double y1 = (weight[0] * ratio - (weight[1] * xOff)) / weight[2];
 		double y2 = (weight[0] * ratio - (weight[1] * (-1) * xOff)) / weight[2];
-		g.setColor(Color.BLUE);
 		((Graphics2D) g).setStroke(new BasicStroke(4f));
 		((Graphics2D) g).draw(new Line2D.Double(windowWeight, yCenter - y1, 0, yCenter - y2));
 	}
@@ -116,16 +117,23 @@ public class Drawer extends JPanel {
 	private void showResultInfo(Graphics g) {
 		g.setColor(blue);
 		String[] tmp = settingValue.split(" ");
-		g.drawString("鏈結值:  [" + tmp[1] + ", " + tmp[2] + "] ", 50, 25);
-		g.drawString("學習率:  " + tmp[4], 50, 50);
-		g.drawString("訓練次數:  " + tmp[3], 50, 75);
-		g.drawString("閥值:  " + tmp[0], 50, 100);
-		g.drawString(" ", 50, 120);
+		((Graphics2D) g).setStroke(new BasicStroke(4f));
+		g.drawRect( 30, 10, 185, 245);
+		g.drawString("鏈結值:  [" + tmp[1] + ", " + tmp[2] + "] ", 50, 28);
+		g.drawString("學習率:  " + tmp[4], 50, 53);
+		g.drawString("訓練次數:  " + tmp[3], 50, 78);
+		g.drawString("閥值:  " + tmp[0], 50, 103);
+		g.drawString(" ", 50, 123);
 		g.drawString("資料數:  " + Integer.toString(result[1] + result[3]), 50, 140);
 		g.drawString("訓練數:  " + Integer.toString(result[1]), 50, 165);
-		g.drawString("訓練正確率: " + Float.toString((float) result[0] / (float) result[1]), 50, 190);
+		g.drawString("訓練正確率: " + Float.toString(((float) result[0] / (float) result[1]) * 100) + " %", 50, 190);
 		g.drawString("測試數:  " + Integer.toString(result[3]), 50, 215);
-		g.drawString("測試正確率: " + Float.toString((float) result[2] / (float) result[3]), 50, 240);
+		g.drawString("測試正確率: " + Float.toString(((float) result[2] / (float) result[3]) * 100) + " %", 50, 240);
+		if(!find) {
+			g.setColor(red);
+			g.drawRect( windowWeight / 2 + 40, 50, 330, 40);
+			g.drawString("Can not Find the suitable sulotion in round time.", windowWeight / 2 + 50, 75);	
+		}
 	}
 
 	private double[] mapping(double[] points) {

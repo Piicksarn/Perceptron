@@ -19,5 +19,4 @@ public class Perceptron extends JFrame {
 		frame.setSize(windowWeight, windowHeight);
 		frame.add(drawer);
 	}
-
 }
