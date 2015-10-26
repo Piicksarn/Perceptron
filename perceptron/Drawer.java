@@ -134,7 +134,7 @@ public class Drawer extends JPanel {
 		if(!find) {
 			g.setColor(purple);
 			g.drawRect( windowWeight / 2 + 40, 50, 330, 40);
-			g.drawString("Can not Find the suitable sulotion in round time.", windowWeight / 2 + 50, 75);	
+			g.drawString("Can not Find the suitable sulotion in round time.", windowWeight / 2 + 50, 75);
 		}
 	}
 

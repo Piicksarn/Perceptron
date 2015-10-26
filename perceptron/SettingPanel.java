@@ -19,14 +19,10 @@ public class SettingPanel extends JPanel {
 		JTextField threshold = new JTextField();
 		JTextField round = new JTextField();
 		JTextField weight = new JTextField();
-		String[] fileItem = { "2Circle2.txt", "2class.txt", "2CloseS.txt", "2CloseS2.txt", "2CloseS3.txt", "2cring.txt",
-				"2CS.txt", "2Hcircle1.txt", "2ring.txt", "5CloseS1.txt", "8OX.TXT", "感知機1.txt", "感知機2.txt", "感知機3.txt",
+		String[] fileItem = { "2Circle2.txt", "2Circle1.txt", "2class.txt", "2CloseS.txt", "2CloseS2.txt", "2CloseS3.txt", "2cring.txt",
+				"2CS.txt", "2Hcircle1.txt", "2Ccircle1.txt", "2ring.txt", "5CloseS1.txt", "8OX.TXT", "感知機1.txt", "感知機2.txt", "感知機3.txt",
 				"感知機4.txt" };
-		/*
-		 * Create a pane named scroll which is scrollable for include the list
-		 * of files' name. The list is include the filename, which named
-		 * "fileItem"
-		 */
+
 		JScrollPane scroll = new JScrollPane();
 		JList list = new JList(fileItem);
 		list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
@@ -76,3 +72,4 @@ public class SettingPanel extends JPanel {
 		return filename;
 	}
 }
+
