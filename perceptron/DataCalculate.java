@@ -6,17 +6,17 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class DataCalculate {
-	public static ArrayList<Data> dataTable = new ArrayList<Data>();
-	public static ArrayList<double[]> dataTmp = new ArrayList<double[]>();
-	public static ArrayList<Data> dataTEST = new ArrayList<Data>();
-	public static ArrayList<Data> dataEXP = new ArrayList<Data>();
-	public static int demention = 3;
-	public static int round = 0;
-	public static boolean find = false;
-	public static double threshold_value;
-	public static double learn;
-	public static double[] w = new double[demention];
-	public static double[] x = new double[demention];
+	private static ArrayList<Data> dataTable = new ArrayList<Data>();
+	private static ArrayList<double[]> dataTmp = new ArrayList<double[]>();
+	private static ArrayList<Data> dataTEST = new ArrayList<Data>();
+	private static ArrayList<Data> dataEXP = new ArrayList<Data>();
+	private static int demention = 3;
+	private static int round = 0;
+	private static boolean find = false;
+	private static double threshold_value;
+	private static double learn;
+	private static double[] w = new double[demention];
+	private static double[] x = new double[demention];
 	private int[] result = new int[4];
 	public String filename;
 
@@ -36,7 +36,6 @@ public class DataCalculate {
 		String line = null;
 		BufferedReader bufferedReader = new BufferedReader(new FileReader(filename));
 		while ((line = bufferedReader.readLine()) != null) {
-
 			String[] item = null;
 			item = line.trim().split("\\s+");
 			double[] data = new double[demention];
@@ -47,7 +46,8 @@ public class DataCalculate {
 		bufferedReader.close();
 	}
 
-	public static void setTable() {
+	// Set the table of the data.
+	public void setTable() {
 		for (int i = 0; i < dataTmp.size(); i++) {
 			double[] point = new double[demention - 1];
 			for (int j = 0; j < (demention - 1); j++) {
@@ -61,14 +61,18 @@ public class DataCalculate {
 		seperateData();
 	}
 
-	public static void seperateData() {
+	// Separate the data into experiment and test data.
+	public void seperateData() {
 		Random rand = new Random();
 		ArrayList<Data> tmp = new ArrayList<Data>();
 		tmp = dataTable;
-		for (int index = 0; index < (tmp.size() * 2 / 3); index++) {
+		float bound = Math.round(tmp.size() * 2 / 3);
+		while (bound != tmp.size()) {
 			int x = rand.nextInt(tmp.size());
-			dataEXP.add(tmp.get(index));
-			tmp.remove(index);
+			dataEXP.add(tmp.get(x));
+			tmp.remove(x);
+			if(tmp.size() == bound)
+				break;
 		}
 		dataTable = dataEXP;
 		dataTEST = tmp;
@@ -81,6 +85,7 @@ public class DataCalculate {
 		x[2] = list.get(index).getPonit()[1];
 	}
 
+	// Calculate the weight test data
 	public static void calculate() {
 		double sum = 0;
 		int sucessCount = 1;
@@ -105,16 +110,14 @@ public class DataCalculate {
 					}
 				} else
 					sucessCount += 1;
-			} // end of for loop for running data in data table.
+			}
 			if (sucessCount == dataTable.size()) {
 				find = true;
 				break;
 			}
-		} // End of for loop for round time.
-		if (sucessCount < dataTable.size()) {
-			find = false;
-			System.out.printf("Can not find the solution in round times.");
 		}
+		if (sucessCount < dataTable.size()) 
+			find = false;
 	}
 
 	private void resultCal() {
@@ -130,7 +133,6 @@ public class DataCalculate {
 			if (Math.signum(sum) == dataTEST.get(i).getD()) {
 				testCount++;
 			}
-
 		}
 		for (int i = 0; i < dataEXP.size(); i++) {
 			initialize(i, dataEXP);
